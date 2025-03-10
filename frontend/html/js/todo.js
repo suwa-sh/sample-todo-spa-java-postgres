@@ -1,6 +1,5 @@
 $(function(){
   $.get("/api/todos").then(function(json){
-  // $.get("http://10.0.2.102:8080/todos").done(function(json){
     json.todos.forEach(element => {
       let checked = '';
       if(element.done_flg == 1){ checked = 'checked'; }
@@ -66,7 +65,6 @@ $(function(){
           console.error(result);
         }
       });
-      //$.put("http://10.0.2.102:8080/todos/" + params.id,params);
     
       //完了ボタンを押した際の処理
       let doneCount =  $('#done_count').text();
@@ -132,7 +130,6 @@ $(function(){
   $('#delete').click(function(){
       $.ajax({
         url: "/api/todos/done",
-        //url: "http://10.0.2.102:8080/todos/done",
         type: 'DELETE',
         success: function(result) {
           $('#donetodos').empty();
