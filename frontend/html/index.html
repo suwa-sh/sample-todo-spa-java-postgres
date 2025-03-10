@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/style.css" />
+<title>TodoApp</title>
+</head>
+<body>
+  <h1>TodoList</h1>
+  <h4>マイタスク</h4>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th style="width:4rem">完了</th>
+        <th style="width:22rem">タイトル</th>
+        <th>期限</th>
+      </tr>
+    </thead>
+    <tbody id="todos">
+<!--
+      <tr class="todo" th:each="todo : ${todos}">
+        <td style="width:2rem">
+          <input type="checkbox"name="done_flg"/>
+          <input type="hidden" name="id" th:value="${todo.id}" />
+        </td>
+        <td  style="width:22rem"><input type="text" style="border:none;width:22rem" name="title" th:value="${todo.title}"/></td>
+        <td><input type="date" style="border:none" name="time_limit" th:value="${todo.time_limit}" /></td>
+      </tr>
+-->
+</tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal">タスクを追加</button>
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <form id="add_form">
+                      <div class="form-group">
+                          タスク名: <input type="text" name="title" class="form-control"placeholder="新しいタスク"/>
+                      </div>
+                      <div class="form-group">
+                          期限: <input type="date" name="time_limit"class="form-control" style="width:60%;" />
+                      </div>
+                      <button type="button" class="btn btn-primary float-right"  data-dismiss="modal" id="add">追加</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <h4>完了したタスク</h4>
+  <div id="done_toggle">
+    <span id="done_count"></span><span class="pr-3">件</span>
+    <span class="button_for_show" style="display:inline-block"></span>
+  </div>
+  <div id="done_table_container" style="display:visible">
+    <table class="table table-borderless" id="done_table">
+      <thead>
+        <tr>
+          <th style="width:4rem">完了</th>
+          <th style="width:22rem">タイトル</th>
+          <th>期限</th>
+        </tr>
+      </thead>
+      <tbody id="donetodos">
+<!--
+        <tr class="todo" th:each="todo : ${doneTodos}">
+          <td style="width:2rem">
+            <input type="checkbox"name="done_flg" checked/>
+            <input type="hidden" name="id" th:value="${todo.id}" />
+          </td>
+          <td  style="width:22rem"><input type="text" style="border:none;width:22rem;text-decoration:line-through" name="title" th:value="${todo.title}"/></td>
+          <td><input type="date"style="border:none;display:none" name="time_limit" th:value="${todo.time_limit}" /></td>
+        </tr>
+-->
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-outline-danger" id="delete">完了を一括削除</button>
+  </div>
+
+  <script type="text/javascript" src="/js/todo.js"></script>
+</body>
+</html>
