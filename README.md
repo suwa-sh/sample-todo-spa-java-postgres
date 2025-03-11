@@ -69,6 +69,12 @@ index
     - frontend: `10.0.2.101/24`
     - backend: `10.0.2.102/24`
     - db: `10.0.2.103/24`
+  - MW
+    - frontend: nginx
+      - LB
+      - web
+    - backend: java ※embedded tomcat (アプリに組み込んだAPサーバ)
+    - db: postgres
 
 ### シーケンス図
 
@@ -82,11 +88,9 @@ index
   - frontend VM
     - port: `80`
       - nginx
-        - LB
-        - web
   - backend VM
     - port: `8080`
-      - Java - Spring Boot
+      - Java ※embedded tomcat
   - db VM
     - port: `5432`
       - Postgres
@@ -98,7 +102,8 @@ index
 - [virtualbox](https://www.virtualbox.org/wiki/Downloads)
 - [vagrant](https://developer.hashicorp.com/vagrant/install?product_intent=vagrant)
 - [ubuntu 24.04 box or ISO](https://portal.cloud.hashicorp.com/vagrant/discover?query=ubuntu24.04)
-- なんらかのSQL client
+- なんらかのSQL client ※DBeaver、A5:SQL Mk-2など
+- なんらかのterminal ※コマンドプロンプト、PowerShellなど
 
 ### db VM
 
@@ -305,22 +310,22 @@ index
 
     ```sh
     # 全件取得 - ブラウザで表示されたもの
-    curl -X GET http://localhost:8080/todos
+    curl -X GET http://10.0.2.102:8080/todos
 
     # 追加
     curl -X POST \
       --header "Content-Type: application/json" \
       --data '{"title":"todo1","done_flg":0,"time_limit":"2025-03-08"}' \
-      http://localhost:8080/todos
+      http://10.0.2.102:8080/todos
 
     # 更新 - タイトル変更 & 完了
     curl -X PUT \
       --header "Content-Type: application/json" \
       --data '{"id":1,"title":"todo1-updated","done_flg":1,"time_limit":"2025-03-08"}' \
-      http://localhost:8080/todos/1
+      http://10.0.2.102:8080/todos/1
 
     # 完了を一括削除
-    curl -X DELETE http://localhost:8080/todos/done
+    curl -X DELETE http://10.0.2.102:8080/todos/done
     ```
 
 ### frontend VM
